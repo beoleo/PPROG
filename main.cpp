@@ -37,11 +37,24 @@ double computeSum( int array[], int n ) {
     return sum;
 }
 
-double computeMagnetisation(int lattice[], int L) {
-    double n = (double) L;
+double computeMagnetisation(int lattice[], int size) {
+    double n = (double) size;
     double sum = computeSum(lattice, n);
     double M = (1/n) * sum;
     return M;
+}
+
+int computeHamiltonian( int i, int L ) {
+
+}
+
+int get2dIndex( int SI, int L){
+    SI = SI + 1;
+    int col;
+    int row;
+    int j;
+    j = SI % L;
+
 }
 
 int main() {
@@ -50,7 +63,4 @@ int main() {
     int latticeSpin[n];
     initLatticeSpin(latticeSpin, n);
     computeMagnetisation(latticeSpin, n);
-//    for (int i = 0; i < n; i++) {
-//        printf("%d, ", latticeSpin[i]);
-//    }
 }

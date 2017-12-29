@@ -44,18 +44,42 @@ double computeMagnetisation(int lattice[], int size) {
     return M;
 }
 
-int computeHamiltonian( int i, int L ) {
+
+int computeHamiltonian( int lattice[], int L ) {
+    int i;
+    int i_up;
+    int i_down;
+    int i_left;
+    int i_right;
+    int H[L*L];
+
+    for (i=0; i < L*L; i++) {
+
+        i_up = i-L;
+        i_down = i+L;
+        i_left = i-1;
+        i_right = i+1;
+
+//        conditions for border positions
+        if(i < L){
+            i_up = i+(L-1)*L;
+        }
+        if(L*(L-1)<= i && i < L*L) {
+            i_down = i-(L-1)*L;
+        }
+        if(i%L == 0) {
+            i_left =i+L-1;
+        }
+        if(i%L == (L-1)) {
+            i_right = i-(L-1);
+        }
+
+        H[i] = - lattice[i] * ( lattice[i_up] + lattice[i_down] + lattice[i_left] + lattice[i_right] ) ;
+        printf("%d, ", H[i]);
+    }
 
 }
 
-int get2dIndex( int SI, int L){
-    SI = SI + 1;
-    int col;
-    int row;
-    int j;
-    j = SI % L;
-
-}
 
 int main() {
     int L=7;
@@ -63,4 +87,5 @@ int main() {
     int latticeSpin[n];
     initLatticeSpin(latticeSpin, n);
     computeMagnetisation(latticeSpin, n);
+    computeHamiltonian(latticeSpin, L);
 }

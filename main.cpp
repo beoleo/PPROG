@@ -132,7 +132,7 @@ void updateLattice ( int latticeSpin[], int Delta_H[] , double effectiveBeta, in
     for (int i = 0; i < n; i++) {
 
         if(Delta_H[i] < 0) {
-            Delta_H[i] = - Delta_H[i];
+            latticeSpin[i] = - latticeSpin[i];
         }
 
         else {
@@ -140,11 +140,11 @@ void updateLattice ( int latticeSpin[], int Delta_H[] , double effectiveBeta, in
             double rand = drawRandomNumber();
             double threshold = exp( - effectiveBeta * (double)Delta_H[i]);
             if( rand <= threshold) {
-                Delta_H[i] = - Delta_H[i];
-//                printf("[%d: yes: thresh=%lf, rand=%lf]; \n", i, threshold, rand );
+                latticeSpin[i] = - latticeSpin[i];
+                printf("[%d: yes: thresh=%lf, rand=%lf]; \n", i, threshold, rand );
             }
             else{
-//                printf("[%d: no: thresh:%lf, rand=%lf]; \n",  i, threshold, rand);
+                printf("[%d: no: thresh:%lf, rand=%lf]; \n",  i, threshold, rand);
                 continue;
             }
         }
@@ -166,18 +166,29 @@ void computeStep( int latticeSpin[], int H[], int Delta_H[], int L, int n, doubl
     updateLattice ( latticeSpin, Delta_H , effectiveBeta, n );
 }
 
+int printLattice(int lattice[], int L, int n) {
+    for (int i = 0; i < L; i++) {
+        for (int j = 0; j < L; j++) {
+            printf("%d; ", lattice[i+j]);
+        }
+        printf("\n");
+    }
+}
+
 int main() {
 
-    int L=4;
+    int L=7;
     int n = L*L;
-    double effectiveBeta = 0.5 ;
+    double effectiveBeta = 0.2 ;
     int latticeSpin[n];
     int H[n];
     int Delta_H[n];
 
     setSpinToCold(latticeSpin, n);
     computeMagnetisation(latticeSpin, n);
-    computeStep(latticeSpin, H, Delta_H, L, n, effectiveBeta);
-
+    for (int i = 0; i < 5; i++) {
+        computeStep(latticeSpin, H, Delta_H, L, n, effectiveBeta);
+    }
+    printLattice(latticeSpin, L, n);
 
 }

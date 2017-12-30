@@ -8,6 +8,7 @@ int L=7;
 
 double drawRandomNumber () {
 // returns a random number between 0 and 1
+// bug: returns exactly the same sequence of numbers each time called. To be fixed.
 
     double v1 = rand();
     double v2 = RAND_MAX+1;
@@ -167,6 +168,11 @@ void computeStep( int latticeSpin[], int H[], int Delta_H[], int L, int n, doubl
 }
 
 int printLattice(int lattice[], int L, int n) {
+//    prints the lattice in 2D.
+//    params: lattice[]: lattice to be printed
+//            L: length of the lattice
+//            n: length of the array
+
     for (int i = 0; i < L; i++) {
         for (int j = 0; j < L; j++) {
             printf("%d; ", lattice[i+j]);

@@ -141,10 +141,10 @@ void updateLattice ( int latticeSpin[], int Delta_H[] , double effectiveBeta, in
             double threshold = exp( - effectiveBeta * (double)Delta_H[i]);
             if( rand <= threshold) {
                 Delta_H[i] = - Delta_H[i];
-                printf("[%d: yes: thresh=%lf, rand=%lf]; \n", i, threshold, rand );
+//                printf("[%d: yes: thresh=%lf, rand=%lf]; \n", i, threshold, rand );
             }
             else{
-                printf("[%d: no: thresh:%lf, rand=%lf]; \n",  i, threshold, rand);
+//                printf("[%d: no: thresh:%lf, rand=%lf]; \n",  i, threshold, rand);
                 continue;
             }
         }
@@ -165,7 +165,6 @@ void computeStep( int latticeSpin[], int H[], int Delta_H[], int L, int n, doubl
     computeDelta(H, Delta_H, n);
     updateLattice ( latticeSpin, Delta_H , effectiveBeta, n );
 }
-
 
 int main() {
 
